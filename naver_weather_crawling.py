@@ -38,17 +38,25 @@ try:
     dust2 = dust_info[1].text # 초미세먼지
 except:
     # 해외 도시 검색시 크롤링될 태그 정의
-    area_title = weather_soup.find('span',{'class': 'btn_select'}).text # 날씨를 검색한 지역명 크롤링
-    area_title = area_title.strip()
-    today_temper = weather_soup.find('span', {'class': 'todaytemp'}).text # 오늘 기온 크롤링
-    today_temper = f"{today_temper}°"
-    today_weather = weather_soup.find('p', {'class': 'cast_txt'}).text # 오늘 날씨
-    today_weather = today_weather[0:2].strip()
-    yesterday_weather = weather_soup.find('p', {'class': 'cast_txt'}).text
-    today_rein = '-'
-    dust1 = '-'
-    dust2 = '-'
-
+    try:
+        area_title = weather_soup.find('span',{'class': 'btn_select'}).text # 날씨를 검색한 지역명 크롤링
+        area_title = area_title.strip()
+        today_temper = weather_soup.find('span', {'class': 'todaytemp'}).text # 오늘 기온 크롤링
+        today_temper = f"{today_temper}°"
+        today_weather = weather_soup.find('p', {'class': 'cast_txt'}).text # 오늘 날씨
+        today_weather = today_weather[0:2].strip()
+        yesterday_weather = weather_soup.find('p', {'class': 'cast_txt'}).text
+        today_rein = '-'
+        dust1 = '-'
+        dust2 = '-'
+    except:
+        area_title = '검색한 지역은 날씨정보가 없음'
+        today_temper = '-'
+        today_weather = '-'
+        yesterday_weather = '-'
+        today_rein = '-'
+        dust1 = '-'
+        dust2 = '-'
 
 print('******** 오늘의 날씨 정보 ********')
 print('검색지역:', area_title)
